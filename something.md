@@ -211,6 +211,10 @@ map[key]使用时，如果map中不存在key，则会调用value的默认构造�
 
 static变量初始化要在类外面，不能在类内部。
 
+## hash
+
+c++标准库中实现了一些hash类，都是function-like class（实现了operator()），但是没有对于string的实现，只有char*的实现。
+
 ## 注意点
 
 1. 转换函数没有参数，没有返回类型，函数名是operator+函数名
