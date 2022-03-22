@@ -49,4 +49,40 @@ public:
             res.emplace_back(it->second);
         }
     }
+    bool backspaceCompare(string s, string t) {
+        int i=s.size()-1,j=t.size()-1;
+        int back1=0,back2=0;
+        while(i>=0||j>=0){
+            if(i>=0&&s[i]=='#'){
+                ++back1;
+                --i;
+                continue;
+            }
+            if (back1>0){
+                --back1;
+                --i;
+                continue;
+            }
+            if(j>=0&&t[j]=='#'){
+                --j;
+                ++back2;
+                continue;
+            }
+            if (back2>0){
+                --back2;
+                --j;
+                continue;
+            }
+            if (i<0||j<0){
+                return false;
+            }
+            if (s[i]!=t[j]){
+                return false;
+            }
+            --i;
+            --j;
+        }
+        cout<<i<<" "<<j<<endl;
+        return i<0&&j<0;
+    }
 };
