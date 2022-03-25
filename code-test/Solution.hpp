@@ -85,4 +85,21 @@ public:
         cout<<i<<" "<<j<<endl;
         return i<0&&j<0;
     }
+    vector<vector<int>> generate(int numRows) {
+        vector<vector<int>> res;
+        vector<int> pre;
+        for (int i=0;i<numRows;++i){
+            vector<int> temp(i+1);
+            temp[0] = 1;
+            temp[i] = 1;
+            if (i>0){
+                pre = res[i-1];
+            }
+            for(int j=1;j<i-1;++j){
+                temp[j] = pre[j-1]+pre[j];
+            }
+            res.emplace_back(temp);
+        }
+        return res;
+    }
 };
