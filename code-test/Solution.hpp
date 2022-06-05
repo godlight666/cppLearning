@@ -2,6 +2,7 @@
 #include <unordered_map>
 #include <iostream>
 #include <algorithm>
+#include <set>
 using namespace std;
 class Solution {
 public:
@@ -48,6 +49,7 @@ public:
         for (unordered_map<string,vector<string>>::iterator it = map.begin();it!=map.end();it++){
             res.emplace_back(it->second);
         }
+        return res;
     }
     bool backspaceCompare(string s, string t) {
         int i=s.size()-1,j=t.size()-1;
@@ -101,5 +103,51 @@ public:
             res.emplace_back(temp);
         }
         return res;
+    }
+    struct Address{
+    public:
+        string local;
+        string domain;
+        Address() = default;
+        Address(string l,string d):local(l),domain(d){};
+        bool operator< (const struct Address& addr) const{
+            if (local<addr.local){
+                return true;
+            }else if (local==addr.local){
+                return domain<addr.domain;
+            }else{
+                return false;
+            }
+        }
+        
+    };
+    int numUniqueEmails(vector<string>& emails) {
+        set<Address> set;
+        for(auto& email:emails){
+            parseEmail(email,set);
+        }
+        return set.size();
+    }
+    void parseEmail(const string& email,set<Address>& set){
+        string local;
+        string domain;
+        int i=0;
+        char ch = email[i++];
+        while(ch != '@'){
+            if (ch == '.'){
+                ch = email[i++];
+                continue;
+            }else if (ch == '+'){
+                while(ch!='@'){
+                    ch = email[i++];
+                }
+            }else{
+                local.push_back(ch);
+                ch = email[i++];
+            }
+        }
+        domain = email.substr(i);
+        Address temp(local,domain);
+        set.insert(temp);
     }
 };

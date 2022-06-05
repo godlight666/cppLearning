@@ -13,3 +13,23 @@
 要注意二义性。
 
 ![image-20211220205121969](C:\Users\Godlight666\AppData\Roaming\Typora\typora-user-images\image-20211220205121969.png)
+
+## 易错点
+
+1. 当返回类型为引用时，如果返回的变量为函数内部变量，则不能返回，因为函数结束该变量的资源被释放了。如下所示：
+
+   ```c++
+   string& toMorse(string word) const {
+       // res为内部变量
+       string res;
+       for (char &ch:word){
+           res.append(MAP[ch-'a']);
+       }
+       // 返回res的引用会出问题
+       return res;
+   }
+   ```
+
+   
+
+2. 
