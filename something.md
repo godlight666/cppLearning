@@ -215,6 +215,37 @@ static变量初始化要在类外面，不能在类内部。
 
 c++标准库中实现了一些hash类，都是function-like class（实现了operator()），但是没有对于string的实现，只有char*的实现。
 
+## 访问控制protected
+
+一个类的protected成员只能被自己以及子类访问，不能被其他类访问(**包括同一父类的子类**,main函数往往也是其他类，所以往往也不能调用protected成员）。另外，子类访问父类的成员也必须用this（没有重名的可以不加），但是不能用父类的实例Instance
+
+```c++
+class Father{
+public:
+    Father(string n):name(n){};
+protected:
+    string name;
+    string getName(){
+        return name;
+    }
+};
+class Son:public Father{
+public:
+    void testFunc(){
+        //这样访问是不可以的，因为这样直接就是父类的实例了，是另一类
+        Father* f = new Father("hello");
+        auto res = f.getName();
+        //可以通过this指针访问
+        this->name = "world";
+        this->getName();
+    }
+}
+```
+
+
+
+
+
 ## 注意点
 
 1. 转换函数没有参数，没有返回类型，函数名是operator+函数名
