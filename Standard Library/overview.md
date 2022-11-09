@@ -21,4 +21,3 @@ c++ standard library 与 c++ standard template library不一样。前者包含�
 
 1. 每个container都有.begin(), end()函数，返回值都是iterator。**包括begin不包括end**
 2. 
-

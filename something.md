@@ -18,21 +18,20 @@ class Fraction{
 public:
     Fraction (int num,int den)
      :m_numerator(num),m_denominator(den){
-        
+
     }
     //转换函数，转成double,
     operator double() const {
         return (double)m_numerator/m_denominator;
     }
-    
+
 private:
     int m_numerator;//分子
     int m_denominator;//分母
 }
 //调用
 Fraction f(3,4);
-double result = 4+f;	//f被转化为0.75
-    
+double result = 4+f;    //f被转化为0.75
 ```
 
 ### non-explict/explict -one-argument ctor
@@ -56,7 +55,7 @@ private:
 }
 //调用
 Fraction f(3,4);
-Fraction result = f+4;	//用ctor将4转化为Fraction，再调用operator+
+Fraction result = f+4;    //用ctor将4转化为Fraction，再调用operator+
 ```
 
 此时，如果加上上面的转换函数。**就会出错，有二义性**，可以把4转化为Fraction，也可以把f转化为double
@@ -82,7 +81,7 @@ private:
 }
 //调用
 Fraction f(3,4);
-Fraction result = f+4;	//出错，有二义性，可以把4转化为Fraction，也可以把f转化为double
+Fraction result = f+4;    //出错，有二义性，可以把4转化为Fraction，也可以把f转化为double
 ```
 
 这是，如果给构造函数加上explicit，就表示只能显式地调用构造函数，4就不会默认转化为Fraction，上面的问题就解决了，但是double还是不会转化为Fraction，所以还是报错。
@@ -241,10 +240,6 @@ public:
     }
 }
 ```
-
-
-
-
 
 ## 注意点
 
