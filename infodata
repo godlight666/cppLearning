@@ -1,0 +1,6 @@
+单机关系型数据库实现
+使用C++实现了一个支持基础SQL语句的单机关系型数据库。
+底层实现了支持LRU的Buffer pool用来管理内存空间。Buffer Pool根据LRU置换算法将磁盘的Page读入或写出，后续数据存储都基于该Buffer Pool。
+在Buffer Pool的基础上实现了Extendible Hash Index。
+SQL语句执行采用火山模型，支持 SELECT，DELETE，UPDATE，JOIN，AGGREGATION，LIMIT，DISTINCT操作。Join 有 Nested Loop Join 和 Hash Join 两种实现。
+实现全局的Lock Manager管理 R/W 锁，基于2阶段锁协议（2PL），支持RU，RC，RR 3种事务隔离级别，基于wound-wait算法实现死锁预防。
